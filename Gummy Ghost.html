@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gummy Ghost</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #87CEEB;
+            margin: 0;
+        }
+        canvas {
+            background-color: #ADD8E6;
+            border: 2px solid #003366;
+            display: block;
+            margin: auto;
+            width: 100%;
+            height: auto;
+        }
+        .intro {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px;
+            font-weight: bold;
+            color: red;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: block;
+            animation: fadeOut 5s ease-out forwards;
+        }
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #retry {
+            display: none;
+            margin-top: 10px;
+        }
+        #score, #highscore {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            margin-top: 10px;
+        }
+        .boton-menu {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: #003366;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 20px;
+}
+
+.boton-menu:hover {
+    background-color: #0055aa;
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+<body>
+    <div class="intro">ESQUIVA EL CARAMELO CALIENTE</div>
+    <h1 style="color: #003366;">Gummy Ghost</h1>
+    <canvas id="gameCanvas"></canvas>
+    <p id="score">Puntos: 0</p>
+    <p id="highscore">Récord: 0</p>
+
+    <div class="controls">
+        <button class="btn" id="left">⬅️ Izquierda</button>
+        <button class="btn" id="jump">⬆️ Salto</button>
+        <button class="btn" id="right">➡️ Derecha</button>
+    </div>
+
+    <button class="btn" id="retry">🔄 Reintentar</button>
+
+    <script>
+        setTimeout(() => {
+            document.querySelector(".intro").style.display = "none";
+        }, 3000); 
+
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth * 0.9;
+            canvas.height = window.innerHeight * 0.6;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        let ghost = { x: 100, y: canvas.height - 60, width: 50, height: 50, velocityY: 0, velocityX: 0, gravity: 0.5, visible: true };
+        let obstacles = [];
+        let gameOver = false;
+        let score = 0;
+        let highscore = 0;
+        let blinkCount = 0;
+
+        function moveLeft() { if (!gameOver) ghost.velocityX = -5; }
+        function moveRight() { if (!gameOver) ghost.velocityX = 5; }
+        function jump() {
+            if (!gameOver && ghost.y >= canvas.height - ghost.height) {
+                ghost.velocityY = -12;
+            }
+        }
+
+        function createObstacle() {
+            let size = Math.random() * 30 + 20;
+            let obstacle = {
+                x: Math.random() * canvas.width,
+                y: 0,
+                width: size,
+                height: size,
+                velocityY: 3
+            };
+            obstacles.push(obstacle);
+        }
+
+        function checkCollision() {
+            for (let obstacle of obstacles) {
+                if (
+                    ghost.x < obstacle.x + obstacle.width &&
+                    ghost.x + ghost.width > obstacle.x &&
+                    ghost.y < obstacle.y + obstacle.height &&
+                    ghost.y + ghost.height > obstacle.y
+                ) {
+                    gameOver = true;
+                    document.getElementById("retry").style.display = "block";
+                    if (score > highscore) {
+                        highscore = score;
+                        document.getElementById("highscore").innerText = "Récord: " + highscore;
+                    }
+                    startBlinkAnimation();
+                }
+            }
+        }
+
+        function startBlinkAnimation() {
+            let blinkInterval = setInterval(() => {
+                ghost.visible = !ghost.visible;
+                blinkCount++;
+                if (blinkCount > 6) { 
+                    clearInterval(blinkInterval);
+                    ghost.visible = false;
+                }
+            }, 200);
+        }
+
+        function updateScore() {
+            if (!gameOver) {
+                score++;
+                document.getElementById("score").innerText = "Puntos: " + score;
+            }
+        }
+
+        document.getElementById("left").addEventListener("click", moveLeft);
+        document.getElementById("right").addEventListener("click", moveRight);
+        document.getElementById("jump").addEventListener("click", jump);
+        document.getElementById("retry").addEventListener("click", () => {
+            ghost.x = 100;
+            ghost.y = canvas.height - 60;
+            ghost.visible = true;
+            blinkCount = 0;
+            obstacles = [];
+            gameOver = false;
+            score = 0;
+            document.getElementById("score").innerText = "Puntos: 0";
+            document.getElementById("retry").style.display = "none";
+        });
+
+        function update() {
+            if (!gameOver) {
+                ghost.velocityY += ghost.gravity;
+                ghost.y += ghost.velocityY;
+                ghost.x += ghost.velocityX;
+
+                if (ghost.y > canvas.height - ghost.height) {
+                    ghost.y = canvas.height - ghost.height;
+                    ghost.velocityY = 0;
+                }
+                if (ghost.y < 50) ghost.y = 50;
+                if (ghost.x < 0) ghost.x = 0;
+                if (ghost.x > canvas.width - ghost.width) ghost.x = canvas.width - ghost.width;
+
+                for (let obstacle of obstacles) {
+                    obstacle.y += obstacle.velocityY;
+                }
+
+                checkCollision();
+
+                if (Math.random() < 0.02) createObstacle();
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (ghost.visible) {
+                ctx.strokeStyle = "white";
+                ctx.strokeRect(ghost.x, ghost.y, ghost.width, ghost.height);
+                ctx.font = "32px Arial";
+                ctx.fillStyle = "white";
+                ctx.fillText("👻", ghost.x + 5, ghost.y + 35);
+            }
+
+            ctx.fillStyle = "red";
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#003366";
+            for (let obstacle of obstacles) {
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+                ctx.strokeRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            }
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        setInterval(updateScore, 500);
+        gameLoop();
+    </script>
+    </div>
+    <nav>
+    <a href="PAGINA WEB.html" class="boton-menu">VOLVER AL MENÚ</a>
+    <nav>
+
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gummy Friends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            text-align: center;
+            color: black;
+        }
+        header {
+            background-color: #fff;
+            color: black;
+            padding: 1.5rem;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #b5b5b5;
+            padding: 1rem;
+        }
+        nav a {
+            color: black;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        .container {
+            width: 90%;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 20px;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .product {
+            width: 30%;
+            margin: 1rem;
+            padding: 1rem;
+            background-color: #EEE;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            width: 100px;
+            height: auto;
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .product select {
+            margin-top: 0.5rem;
+            padding: 0.3rem;
+        }
+        .cart {
+            background-color: #EEE;
+            padding: 1rem;
+            margin-top: 2rem;
+            color: black;
+            border-radius: 20px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+        @keyframes slideIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .cart-items {
+            list-style: none;
+            padding: 0;
+        }
+        .cart-items li {
+            margin: 0.5rem 0;
+        }
+        .total {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .buy-button {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #ff4500;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .buy-button:active {
+            background-color: #cc3700;
+        }
+        .rating-box {
+            width: 310px;
+            padding: 20px;
+            background-color: #b5b5b5;
+            border-radius: 10px;
+            text-align: center;
+            color: black;
+            margin: 2rem auto;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+        .gummies {
+            font-size: 3rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+        .gummy {
+            padding: 0.1rem;
+            transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+            opacity: 0.5;
+        }
+        .gummy:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        #rating-result {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .comment-box {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            color: #333;
+            text-align: left;
+        }
+        .comment-box h2 {
+            color: #003366;
+            text-align: center;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            transition: border-color 0.3s ease-in-out;
+        }
+        textarea:focus {
+            border-color: #007bff;
+        }
+        .comment-box button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .comment-box button:hover {
+            background-color: #0056b3;
+        }
+        .comments {
+            margin-top: 20px;
+        }
+        .comment {
+            background: #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            animation: slideIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+         <img src="Logo.png"><header>Gummy Friends</header>
+    <nav>
+        <a href="Gomitas.html">📋</a>
+        <a href="perfil.html">👤</a>
+        <a href="Gummy Ghost.html">🎮</a>
+    </nav>
+    <div class="container">
+        <h2>Elige tus gomitas favoritas</h2>
+        <div class="products">
+            <div class="product">
+                <h3>Gomitas de Vivoritas</h3>
+                <img src="Vivoritas.jpg" alt="Gomitas de Osito">
+                <p>Precio: $50 MXN</p>
+                <label>Cantidad:</label>
+                <select id="osito">
+                    <option value="0">Selecciona</option>
+                    <option value="1">1 paquete</option>
+                    <option value="2">2 paquetes</option>
+                    <option value="3">3 paquetes</option>
+                    <option value="4">4 paquetes</option>
+                    <option value="5">5 paquetes</option>
+                    <option value="6">6 paquetes</option>
+                    <option value="7">7 paquetes</option>
+                    <option value="8">8 paquetes</option>
+                    <option value="9">9 paquetes</option>
+                    <option value="10">10 paquetes</option>
+                </select>
+            </div>
+            <div class="product">
+                <h3>Gomitas Ácidas</h3>
+                <img src="Ácidas.jpg" alt="Gomitas Ácidas">
+                <p>Precio: $45 MXN</p>
+                <label>Cantidad:</label>
+                <select id="acidas">
+                    <option value="0">Selecciona</option>
+                    <option value="1">1 paquete</option>
+                    <option value="2">2 paquetes</option>
+                    <option value="3">3 paquetes</option>
+                    <option value="4">4 paquetes</option>
+                    <option value="5">5 paquetes</option>
+                    <option value="6">6 paquetes</option>
+                    <option value="7">7 paquetes</option>
+                    <option value="8">8 paquetes</option>
+                    <option value="9">9 paquetes</option>
+                    <option value="10">10 paquetes</option>
+                </select>
+            </div>
+            <div class="product">
+                <h3>Gomitas Frutales</h3>
+                <img src="Frutales.jpg" alt="Gomitas Frutales">
+                <p>Precio: $40 MXN</p>
+                <label>Cantidad:</label>
+                <select id="frutales">
+                    <option value="0">Selecciona</option>
+                    <option value="1">1 paquete</option>
+                    <option value="2">2 paquetes</option>
+                    <option value="3">3 paquetes</option>
+                    <option value="4">4 paquetes</option>
+                    <option value="5">5 paquetes</option>
+                    <option value="6">6 paquetes</option>
+                    <option value="7">7 paquetes</option>
+                    <option value="8">8 paquetes</option>
+                    <option value="9">9 paquetes</option>
+                    <option value="10">10 paquetes</option>
+                </select>
+            </div>
+            <div class="product">
+                <h3>Gomitas de Estrella</h3>
+                <img src="Estrella.jpg" alt="Gomitas Rellenas">
+                <p>Precio: $55 MXN</p>
+                <label>Cantidad:</label>
+                <select id="rellenas">
+                    <option value="0">Selecciona</option>
+                    <option value="1">1 paquete</option>
+                    <option value="2">2 paquetes</option>
+                    <option value="3">3 paquetes</option>
+                    <option value="4">4 paquetes</option>
+                    <option value="5">5 paquetes</option>
+                    <option value="6">6 paquetes</option>
+                    <option value="7">7 paquetes</option>
+                    <option value="8">8 paquetes</option>
+                    <option value="9">9 paquetes</option>
+                    <option value="10">10 paquetes</option>
+                </select>
+            </div>
+            <div class="product">
+                <h3>Gomitas de Coca-Cola</h3>
+                <img src="Cocacola.jpg" alt="Gomitas de Coca-Cola">
+                <p>Precio: $48 MXN</p>
+                <label>Cantidad:</label>
+                <select id="cocacola">
+                    <option value="0">Selecciona</option>
+                    <option value="1">1 paquete</option>
+                    <option value="2">2 paquetes</option>
+                    <option value="3">3 paquetes</option>
+                    <option value="4">4 paquetes</option>
+                    <option value="5">5 paquetes</option>
+                    <option value="6">6 paquetes</option>
+                    <option value="7">7 paquetes</option>
+                    <option value="8">8 paquetes</option>
+                    <option value="9">9 paquetes</option>
+                    <option value="10">10 paquetes</option>
+                </select>
+            </div>
+            <div class="product">
+                <h3>Gomitas de botellita</h3>
+                <img src="Botellita.jpg" alt="Gomitas con Chile">
+                <p>Precio: $50 MXN</p>
+                <label>Cantidad:</label>
+                <select id="chile">
+                    <option value="0">Selecciona</option>
+                    <option value="1">1 paquete</option>
+                    <option value="2">2 paquetes</option>
+                    <option value="3">3 paquetes</option>
+                    <option value="4">4 paquetes</option>
+                    <option value="5">5 paquetes</option>
+                    <option value="6">6 paquetes</option>
+                    <option value="7">7 paquetes</option>
+                    <option value="8">8 paquetes</option>
+                    <option value="9">9 paquetes</option>
+                    <option value="10">10 paquetes</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button class="buy-button" onclick="addToCart()">Comprar</button>
+
+    <div class="cart">
+        <h2>Carrito de Compras</h2>
+        <ul class="cart-items"></ul>
+        <p class="total">Total: $0 MXN</p>
+    </div>
+    <style>
+        .question-container {
+            display: none;
+        }
+        .thank-you {
+            display: none;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #000;
+        }
+        button {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            background-color: #444;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #EEE;
+        }
+    </style>
+    <h1>¿Tienes alguna sugerencia?</h1>
+    <div class="container">
+        <div id="question1" class="question-container">
+            <p>1. ¿Qué gomitas te gustaría que agregaramos?</p>
+            <button onclick="nextQuestion(1)">Sandia</button>
+            <button onclick="nextQuestion(1)">Ositos</button>
+            <button onclick="nextQuestion(1)">Tiburon</button>
+            <button onclick="nextQuestion(1)">Otros</button>
+        </div>
+        <div id="question2" class="question-container">
+            <p>2. ¿Cuál es tu sabor favorito de nuestras gomitas?</p>
+            <button onclick="nextQuestion(2)">Kiwi</button>
+            <button onclick="nextQuestion(2)">Limón</button>
+            <button onclick="nextQuestion(2)">Naranja</button>
+            <button onclick="nextQuestion(2)">Toronja</button>
+            <button onclick="nextQuestion(2)">CocaCola</button>
+            <button onclick="nextQuestion(2)">Fresa</button>
+            <button onclick="nextQuestion(2)">Zarzamora</button>
+            <button onclick="nextQuestion(2)">Uva</button>
+            <button onclick="nextQuestion(2)">Manzana</button>
+            <button onclick="nextQuestion(2)">Cereza</button>
+            <button onclick="nextQuestion(2)">Mango</button>
+        </div>
+        <div id="question3" class="question-container">
+            <p>3. ¿Qué opinas sobre el sabor de nuestras gomitas?</p>
+            <button onclick="nextQuestion(3)">Bueno</button>
+            <button onclick="nextQuestion(3)">Muy bueno</button>
+            <button onclick="nextQuestion(3)">Regular</button>
+            <button onclick="nextQuestion(3)">Podria mejorar</button>
+        </div>
+        <div id="question4" class="question-container">
+            <p>4. ¿Crees que el contenido en las bolsas es el suficiente para el precio?</p>
+            <button onclick="nextQuestion(4)">Sí</button>
+            <button onclick="nextQuestion(4)">No</button>
+        </div>
+        <div id="question5" class="question-container">
+            <p>4. ¿Crees que el contenido en las bolsas es el suficiente para el precio?</p>
+            <button onclick="showThankYou()">Si</button>
+            <button onclick="showThankYou()">No</button>
+        </div>
+
+        <div class="thank-you" id="thank-you">
+            <p>!Gracias por compartirnos tu opinión!</p>
+        </div>
+    </div>
+
+    <script>
+        function nextQuestion(questionNumber) {
+            document.getElementById("question" + questionNumber).style.display = "none";
+            document.getElementById("question" + (questionNumber + 1)).style.display = "block";
+        }
+
+        function showThankYou() {
+            document.getElementById("question5").style.display = "none";
+            document.getElementById("thank-you").style.display = "block";
+        }
+
+        window.onload = function() {
+            document.getElementById("question1").style.display = "block";
+        };
+    </script>
+
+</body>
+</html>
+
+    <div class="rating-box">
+        <h2>¿Cómo te sentiste?</h2>
+        <h2>Califica tu experiencia:</h2>
+        <div class="gummies">
+            <span class="gummy" onclick="rate(1)" data-value="1">🍬</span>
+            <span class="gummy" onclick="rate(2)" data-value="2">🍬</span>
+            <span class="gummy" onclick="rate(3)" data-value="3">🍬</span>
+            <span class="gummy" onclick="rate(4)" data-value="4">🍬</span>
+            <span class="gummy" onclick="rate(5)" data-value="5">🍬</span>
+        </div>
+        <p id="rating-result"></p>
+    </div>
+
+    <div class="comment-box">
+        <h2>Deja tu comentario</h2>
+        <textarea id="commentInput" placeholder="Escribe tu comentario aquí..."></textarea>
+        <button onclick="addComment()">Publicar</button>
+        <div class="comments" id="commentsContainer"></div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart() {
+            let products = [
+                { name: "Gomitas de Vivoritas", price: 50, id: "osito" },
+                { name: "Gomitas Ácidas", price: 45, id: "acidas" },
+                { name: "Gomitas Frutales", price: 40, id: "frutales" },
+                { name: "Gomitas Rellenas", price: 55, id: "rellenas" },
+                { name: "Gomitas de Coca-Cola", price: 48, id: "cocacola" },
+                { name: "Gomitas de Estrella", price: 50, id: "chile" }
+            ];
+
+            cart = [];
+            let total = 0;
+            let cartList = document.querySelector('.cart-items');
+            let totalElement = document.querySelector('.total');
+            cartList.innerHTML = "";
+
+            products.forEach(product => {
+                let quantity = document.getElementById(product.id).value;
+                if (quantity > 0) {
+                    cart.push({ name: product.name, price: product.price, quantity });
+                    let li = document.createElement('li');
+                    li.textContent = `${quantity} x ${product.name} - $${product.price * quantity} MXN`;
+                    cartList.appendChild(li);
+                    total += product.price * quantity;
+                }
+            });
+
+            totalElement.textContent = `Total: $${total} MXN`;
+        }
+
+        function rate(gummies) {
+            document.getElementById("rating-result").textContent = `Has calificado con ${gummies} gomitas`;
+
+            document.querySelectorAll(".gummy").forEach(g => g.style.opacity = "0.5");
+
+            for (let i = 0; i < gummies; i++) {
+                document.querySelectorAll(".gummy")[i].style.opacity = "1";
+            }
+        }
+
+        function addComment() {
+            let commentInput = document.getElementById("commentInput");
+            let commentsContainer = document.getElementById("commentsContainer");
+
+            if (commentInput.value.trim() !== "") {
+                let newComment = document.createElement("div");
+                newComment.classList.add("comment");
+                newComment.textContent = commentInput.value;
+
+                commentsContainer.appendChild(newComment);
+                commentInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gomitas Felices - Encuestas</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            text-align: center;
+        }
+        footer {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #grafica-container {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 30px auto;
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        a {
+            color: black;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <footer>
+        <h3>¡Gracias por visitar nuestra tienda dulce!</h3>
+
+        <p>
+            📧 Contacto: <a href="mailto:contacto@gomitasfelices.com">contacto@gomitasfelices.com</a>
+        </p>
+        <p>📍 Dirección: Dulcelandia #123, Ciudad Gominola</p>
+        <p>📞 Tel: +52 55 1234 5678</p>
+
+        <hr style="border: 1px solid black;">
+
+        <p style="font-size: 14px; max-width: 800px; margin: 0 auto;">
+            ⚖️ <strong>Aviso Legal:</strong> Este sitio web es propiedad de Gomitas Felices S.A. de C.V. y está destinado únicamente para la venta de productos comestibles. Las imágenes y descripciones son ilustrativas. El uso de este sitio implica la aceptación de nuestros términos y condiciones. Consulta nuestras políticas de privacidad para más detalles.
+        </p>
+
+        <hr style="border: 1px solid black;">
+
+        <h4>Resultados de nuestras encuestas 📊</h4>
+        <div id="grafica-container">
+            <canvas id="graficoEncuestas"></canvas>
+        </div>
+
+        <p>&copy; 2025 Gomitas Felices. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const ctx = document.getElementById("graficoEncuestas").getContext("2d");
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["No contestadas", "Inconclusas", "Completadas"],
+                    datasets: [{
+                        label: "Porcentaje de encuestas",
+                        data: [25, 35, 40], // Puedes ajustar los valores
+                        backgroundColor: ["#ff6384", "#ffcd56", "#36a2eb"],
+                        borderColor: "black",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: "top", labels: { color: "black" } }
+                    },
+                    scales: {
+                        x: { ticks: { color: "black" } },
+                        y: { ticks: { color: "black" }, beginAtZero: true, max: 100 }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

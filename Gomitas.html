@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gummy Friends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFF;
+            color: Black;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #b5b5b5;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+        nav {
+            text-align: center;
+            margin: 15px 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .boton-menu {
+            display: inline-block;
+            background-color: #EEE;
+            color: black;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .boton-menu:hover {
+            background-color: #fff;
+            transform: scale(1.1);
+        }
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            animation: slideIn 1.5s ease-in-out;
+        }
+        .productos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .producto {
+            background-color: #EEE;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            animation: float 3s infinite ease-in-out;
+            width: 40%;
+        }
+        footer {
+            background-color: #EEE;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Bienvenidos Gummy Friends
+    </header>
+
+    <nav>
+        <a href="PAGINA WEB.html" class="boton-menu">VOLVER AL MENÚ</a>
+    </nav>
+
+    <section>
+        <h2>Nuestra misión</h2>
+        <p>Endulzar momentos con gomitas de alta calidad, elaboradas con los mejores ingredientes y un toque especial de creatividad.</p>
+    </section>
+    <section>
+        <h2>✨ Nuestra Colección de Gomitas ✨</h2>
+        <p>Ofrecer gomitas artesanales de alta calidad elaboradas con ingredientesnaturales y sabores únicos que deleiten los paladares más exigentes.</p>
+        <div class="productos">
+            <div class="producto">
+                <h3>Gomitas de Vivorita</h3>
+                <p>Figura: Tira</p>
+                <p>Sabores: Manzana - piña, Piña - Fresa, Cereza - Limón </p>
+                <p>Textura: Suave y esponjosa</p>
+                <p>Ingredientes:</p>
+                <p>- Jugo de frutas</p>
+                <p>- Azúcar</p>
+                <p>- Grenetina</p>
+                <p>- Colorante vegetal</p>
+            </div>
+            <div class="producto">
+                <h3>Gomitas Ácidas</h3>
+                <p>Figura: Óvalo.</p>
+                <p>Sabores: Kiwi, limón, naranja, toronja, fresa y zarzamora</p>
+                <p>Textura: Suave y esponjosa</p>
+                <p>Ingredientes:</p>
+                <p>- Jugo de fruta</p>
+                <p>- Azúcar</p>
+                <p>- Grenetina</p>
+                <p>- Colorante vegetal</p>
+            </div>
+            <div class="producto">
+                <h3>Gomitas Frutales</h3>
+                <p>Sabores: Piña, fresa, mango, cereza, , naranja, uva, kiwi y manzana</p>
+                <p>Textura: Suave y esponjosa</p>
+                <p>Ingredientes:</p>
+                <p>- Jugo de fruta</p>
+                <p>- Azúcar</p>
+                <p>- Grenetina</p>
+                <p>- Colorante vegetal</p>
+            </div>
+            <div class="producto">
+                <h3>Gomitas de Estrella</h3>
+                <p>Figura: Estrella</p>
+                <p>Sabores: Piña, limón, fresa, mango, cereza, naranja, uva y manzana</p>
+                <p>Textura: Suave y esponjosa</p>
+                <p>Ingredientes:</p>
+                <p>-Jugo de fruta</p>
+                <p>- Azúcar</p>
+                <p>- Grenetina</p>
+                <p>- Colorante vegetal</p>
+            </div>
+            <div class="producto">
+                <h3>Gomitas de CocaCola</h3>
+                <p>Figura: Lata</p>
+                <p>Sabores: CocaCola</p>
+                <p>Textura: Suave y esponjosa</p>
+                <p>Ingredientes:</p>
+                <p>- Grenetina</p>
+                <p>- Imitación del refresco con sabor coca-cola</p>
+            </div>
+            <div class="producto">
+                <h3>Gomitas de Botellita</h3>
+                <p>Figura: Botella</p>
+                <p>Sabores:Piña, limón, fresa, mango, cereza, naranja, uva y manzana</p>
+                <p>Textura: Suave y esponjosa</p>
+                <p>Ingredientes:</p>
+                <p>- Jugo de fruta</p>
+                <p>- Azúcar</p>
+                <p>- Grenetina</p>
+                <p>- Colorante artificial</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        Contáctanos para más información 🍬
+    </footer>
+</body>
+</html>
